@@ -61,58 +61,26 @@ console.log(\`Adults: \${manager.getAdults().length}\`);`,
   {
     name: "JavaScript",
     filetype: "javascript" as const,
-    code: `// React Component Example
-import React, { useState, useEffect } from 'react';
+    code: `// Vanilla JavaScript todo list
+const todos = [];
 
-function TodoApp() {
-  const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState('');
+function addTodo(text) {
+  if (!text.trim()) return;
+  todos.push({ id: Date.now(), text, completed: false });
+}
 
-  useEffect(() => {
-    // Load todos from localStorage
-    const saved = localStorage.getItem('todos');
-    if (saved) {
-      setTodos(JSON.parse(saved));
-    }
-  }, []);
+function toggleTodo(id) {
+  const todo = todos.find((t) => t.id === id);
+  if (todo) {
+    todo.completed = !todo.completed;
+  }
+}
 
-  const addTodo = () => {
-    if (input.trim()) {
-      const newTodo = {
-        id: Date.now(),
-        text: input,
-        completed: false
-      };
-      setTodos([...todos, newTodo]);
-      setInput('');
-    }
-  };
+addTodo("Write documentation");
+addTodo("Ship OpenTUI release");
+toggleTodo(todos[0].id);
 
-  const toggleTodo = (id) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
-  };
-
-  return (
-    <div className="todo-app">
-      <h1>My Todo List</h1>
-      <input
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyPress={(e) => e.key === 'Enter' && addTodo()}
-      />
-      <button onClick={addTodo}>Add</button>
-      <ul>
-        {todos.map(todo => (
-          <li key={todo.id} onClick={() => toggleTodo(todo.id)}>
-            {todo.completed ? '✓' : '○'} {todo.text}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}`,
+console.log(todos);`,
   },
   {
     name: "Markdown",

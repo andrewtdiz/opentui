@@ -14,7 +14,7 @@ type Message = {
 // Sample message templates with different sizes
 const messageTemplates = [
   "Hello! How can I help you today?",
-  "I understand you're looking for information about React development.\n\nLet me provide you with some detailed guidance on best practices\nfor building modern web applications.",
+  "I understand you're looking for information about frontend development.\n\nLet me provide you with some detailed guidance on best practices\nfor building modern web applications.",
   "That's a great question! When working with SolidJS, you should\nconsider the reactive principles that make it different from other frameworks.\n\nThe key is understanding signals and how they automatically\ntrack dependencies.",
   "Based on your requirements, I recommend the following approach:\n\n1) Set up your development environment\n2) Create the basic component structure\n3) Implement the core functionality\n4) Add error handling and testing\n\nThis systematic approach will ensure you build a robust solution.",
   "The scrollbox component in OpenTUI provides excellent performance\ncharacteristics for handling large amounts of content.\n\nIt uses virtual scrolling under the hood to efficiently render\nonly the visible portion of your data, making it ideal for chat\napplications, logs, or any scenario where you need to display\npotentially unbounded content streams.",

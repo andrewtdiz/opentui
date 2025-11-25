@@ -1,14 +1,13 @@
 export function extToFiletype(extension: string): string | undefined {
   const extensionToFiletype: Map<string, string> = new Map([
     ["js", "javascript"],
-    ["jsx", "javascriptreact"],
+    ["jsx", "javascript"],
     ["ts", "typescript"],
-    ["tsx", "typescriptreact"],
+    ["tsx", "typescript"],
     ["md", "markdown"],
     ["json", "json"],
     ["py", "python"],
     ["rb", "ruby"],
-    ["go", "go"],
     ["rs", "rust"],
     ["c", "c"],
     ["cpp", "cpp"],

@@ -58,7 +58,7 @@
           "type": "element",
           "tagName": "span",
           "properties": { "className": "string" },
-          "children": [{ "type": "text", "value": "'react'" }]
+          "children": [{ "type": "text", "value": "'@opentui/core'" }]
         },
         {
           "type": "element",
@@ -92,7 +92,7 @@
           "type": "element",
           "tagName": "span",
           "properties": { "className": "type" },
-          "children": [{ "type": "text", "value": "ReactNode" }]
+          "children": [{ "type": "text", "value": "RenderableNode" }]
         },
         { "type": "text", "value": " " },
         {
@@ -113,7 +113,7 @@
           "type": "element",
           "tagName": "span",
           "properties": { "className": "string" },
-          "children": [{ "type": "text", "value": "'react'" }]
+          "children": [{ "type": "text", "value": "'@opentui/core'" }]
         },
         {
           "type": "element",
@@ -310,7 +310,7 @@
           "type": "element",
           "tagName": "span",
           "properties": { "className": "type" },
-          "children": [{ "type": "text", "value": "ReactNode" }]
+          "children": [{ "type": "text", "value": "RenderableNode" }]
         },
         { "type": "text", "value": " " },
         {

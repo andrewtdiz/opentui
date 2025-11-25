@@ -2,7 +2,6 @@
 
 set -e 
 
-LINK_REACT=false
 LINK_SOLID=false
 LINK_DIST=false
 COPY_MODE=false
@@ -10,10 +9,6 @@ TARGET_ROOT=""
 
 while [[ $# -gt 0 ]]; do
     case $1 in
-        --react)
-            LINK_REACT=true
-            shift
-            ;;
         --solid)
             LINK_SOLID=true
             shift
@@ -34,15 +29,13 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [ -z "$TARGET_ROOT" ]; then
-    echo "Usage: $0 <target-project-root> [--react] [--solid] [--dist] [--copy]"
+    echo "Usage: $0 <target-project-root> [--solid] [--dist] [--copy]"
     echo "Example: $0 /path/to/your/project"
     echo "Example: $0 /path/to/your/project --solid"
-    echo "Example: $0 /path/to/your/project --react --dist"
     echo "Example: $0 /path/to/your/project --dist --copy"
     echo ""
     echo "By default, only @opentui/core is linked."
     echo "Options:"
-    echo "  --react   Also link @opentui/react"
     echo "  --solid   Also link @opentui/solid and solid-js"
     echo "  --dist    Link dist directories instead of source packages"
     echo "  --copy    Copy dist directories instead of symlinking (requires --dist)"
@@ -117,56 +110,6 @@ if [ -d "$CORE_PATH" ]; then
     link_or_copy "$CORE_PATH" "$NODE_MODULES_DIR/@opentui/core" "@opentui/core"
 else
     echo "Warning: $CORE_PATH not found"
-fi
-
-# Link React if requested
-if [ "$LINK_REACT" = true ]; then
-    remove_if_exists "$NODE_MODULES_DIR/@opentui/react"
-    REACT_PATH="$OPENTUI_ROOT/packages/react$SUFFIX"
-    if [ -d "$REACT_PATH" ]; then
-        link_or_copy "$REACT_PATH" "$NODE_MODULES_DIR/@opentui/react" "@opentui/react"
-    else
-        echo "Warning: $REACT_PATH not found"
-    fi
-
-    # Only link react, react-dom, and react-reconciler when not in copy mode
-    if [ "$COPY_MODE" = false ]; then
-        # Link react
-        remove_if_exists "$NODE_MODULES_DIR/react"
-        if [ -d "$OPENTUI_ROOT/node_modules/react" ]; then
-            ln -s "$OPENTUI_ROOT/node_modules/react" "$NODE_MODULES_DIR/react"
-            echo "✓ Linked react"
-        elif [ -d "$OPENTUI_ROOT/packages/react/node_modules/react" ]; then
-            ln -s "$OPENTUI_ROOT/packages/react/node_modules/react" "$NODE_MODULES_DIR/react"
-            echo "✓ Linked react (from packages/react/node_modules)"
-        else
-            echo "Warning: react not found in OpenTUI node_modules"
-        fi
-
-        # Link react-dom
-        remove_if_exists "$NODE_MODULES_DIR/react-dom"
-        if [ -d "$OPENTUI_ROOT/node_modules/react-dom" ]; then
-            ln -s "$OPENTUI_ROOT/node_modules/react-dom" "$NODE_MODULES_DIR/react-dom"
-            echo "✓ Linked react-dom"
-        elif [ -d "$OPENTUI_ROOT/packages/react/node_modules/react-dom" ]; then
-            ln -s "$OPENTUI_ROOT/packages/react/node_modules/react-dom" "$NODE_MODULES_DIR/react-dom"
-            echo "✓ Linked react-dom (from packages/react/node_modules)"
-        else
-            echo "Warning: react-dom not found in OpenTUI node_modules"
-        fi
-
-        # Link react-reconciler
-        remove_if_exists "$NODE_MODULES_DIR/react-reconciler"
-        if [ -d "$OPENTUI_ROOT/node_modules/react-reconciler" ]; then
-            ln -s "$OPENTUI_ROOT/node_modules/react-reconciler" "$NODE_MODULES_DIR/react-reconciler"
-            echo "✓ Linked react-reconciler"
-        elif [ -d "$OPENTUI_ROOT/packages/react/node_modules/react-reconciler" ]; then
-            ln -s "$OPENTUI_ROOT/packages/react/node_modules/react-reconciler" "$NODE_MODULES_DIR/react-reconciler"
-            echo "✓ Linked react-reconciler (from packages/react/node_modules)"
-        else
-            echo "Warning: react-reconciler not found in OpenTUI node_modules"
-        fi
-    fi
 fi
 
 # Link Solid and solid-js if requested

@@ -3,7 +3,7 @@ import { ConsolePosition } from "@opentui/core"
 import { render, useRenderer, useSelectionHandler, type TextProps } from "@opentui/solid"
 import { createEffect, createSignal, onMount } from "solid-js"
 
-const words = ["Hello", "World", "OpenTUI", "SolidJS", "ReactJS", "TypeScript", "JavaScript", "CSS", "HTML", "JSX"]
+const words = ["Hello", "World", "OpenTUI", "SolidJS", "TypeScript", "JavaScript", "CSS", "HTML", "JSX"]
 
 export default function TextSelectionDemo() {
   const renderer = useRenderer()

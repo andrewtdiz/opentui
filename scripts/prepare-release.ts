@@ -1,7 +1,6 @@
 import { readFileSync, writeFileSync } from "fs"
 import { join, resolve, dirname } from "path"
 import { fileURLToPath } from "url"
-import { execSync } from "child_process"
 import process from "process"
 
 interface PackageJson {
@@ -17,15 +16,13 @@ const __dirname = dirname(__filename)
 const rootDir = resolve(__dirname, "..")
 
 const args = process.argv.slice(2)
-const includeVue = args.includes("--include-vue")
 let version = args.find((arg) => !arg.startsWith("--"))
 
 if (!version) {
   console.error("Error: Please provide a version number")
-  console.error("Usage: bun scripts/prepare-release.ts <version> [--include-vue]")
+  console.error("Usage: bun scripts/prepare-release.ts <version>")
   console.error("Example: bun scripts/prepare-release.ts 0.2.0")
   console.error("         bun scripts/prepare-release.ts '*' (auto-increment patch)")
-  console.error("         bun scripts/prepare-release.ts 0.2.0 --include-vue")
   process.exit(1)
 }
 
@@ -61,7 +58,7 @@ if (!/^\d+\.\d+\.\d+(-[a-zA-Z0-9.-]+)?$/.test(version)) {
   process.exit(1)
 }
 
-const packagesText = includeVue ? "all packages" : "core, react, and solid packages"
+const packagesText = "core and solid packages"
 console.log(`\nPreparing release ${version} for ${packagesText}...\n`)
 
 const corePackageJsonPath = join(rootDir, "packages", "core", "package.json")
@@ -88,22 +85,6 @@ try {
   process.exit(1)
 }
 
-const reactPackageJsonPath = join(rootDir, "packages", "react", "package.json")
-console.log("\nUpdating @opentui/react...")
-
-try {
-  const reactPackageJson: PackageJson = JSON.parse(readFileSync(reactPackageJsonPath, "utf8"))
-
-  reactPackageJson.version = version
-
-  writeFileSync(reactPackageJsonPath, JSON.stringify(reactPackageJson, null, 2) + "\n")
-  console.log(`  @opentui/react updated to version ${version}`)
-  console.log(`  Note: @opentui/core dependency will be set to ${version} during build`)
-} catch (error) {
-  console.error(`  Failed to update @opentui/react: ${error}`)
-  process.exit(1)
-}
-
 const solidPackageJsonPath = join(rootDir, "packages", "solid", "package.json")
 console.log("\nUpdating @opentui/solid...")
 
@@ -120,36 +101,7 @@ try {
   process.exit(1)
 }
 
-if (includeVue) {
-  const vuePackageJsonPath = join(rootDir, "packages", "vue", "package.json")
-  console.log("\nUpdating @opentui/vue...")
-
-  try {
-    const vuePackageJson: PackageJson = JSON.parse(readFileSync(vuePackageJsonPath, "utf8"))
-
-    vuePackageJson.version = version
-
-    writeFileSync(vuePackageJsonPath, JSON.stringify(vuePackageJson, null, 2) + "\n")
-    console.log(`  @opentui/vue updated to version ${version}`)
-    console.log(`  Note: @opentui/core dependency will be set to ${version} during build`)
-  } catch (error) {
-    console.error(`  Failed to update @opentui/vue: ${error}`)
-    process.exit(1)
-  }
-} else {
-  console.log("\nSkipping @opentui/vue (use --include-vue to include)")
-}
-
-console.log("\nUpdating bun.lock...")
-try {
-  execSync("bun install", { cwd: rootDir, stdio: "inherit" })
-  console.log("  bun.lock updated successfully")
-} catch (error) {
-  console.error(`  Failed to update bun.lock: ${error}`)
-  process.exit(1)
-}
-
-const publishCmd = includeVue ? "bun run publish --include-vue" : "bun run publish"
+const publishCmd = "bun run publish"
 
 console.log(`
 Successfully prepared release ${version} for ${packagesText}!

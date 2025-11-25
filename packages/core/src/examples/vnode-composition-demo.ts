@@ -24,8 +24,8 @@ const transparent = parseColor("transparent")
 
 const { bold, italic, underline, dim, boldItalic, boldUnderline, italicUnderline, color, bgColor, styled } = vstyles
 
-// This is NOT react and not reactive, it's just a declarative way to compose renderables
-// and mount them into a parent container.
+// This is a declarative way to compose renderables without relying on a browser UI runtime.
+// It mounts renderables into a parent container.
 function MyRenderable(props: any, children: VNode[] = []) {
   const mouseHandler = (event: MouseEvent) => {
     console.log("mouseHandler", event.type)

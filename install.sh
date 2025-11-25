@@ -143,8 +143,5 @@ fi
 
 echo -e "${GREEN}✓ OpenTUI installed successfully!${NC}"
 echo ""
-echo "You can now use OpenTUI in your Go projects:"
-echo "  go get github.com/dnakov/opentui/packages/go"
-echo ""
 echo "To uninstall:"
 echo "  sudo rm $INCLUDE_DIR/opentui.h $LIB_DIR/$LIB_FILE"

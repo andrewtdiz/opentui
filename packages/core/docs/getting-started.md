@@ -18,7 +18,7 @@ Renderables are the building blocks of your UI - hierarchical objects that can b
 
 ### Constructs (Components)
 
-Constructs look just like React or Solid components, but are not render functions. You can think of them as constructors, a way to create new renderables by composing existing ones. They provide a more declarative way to build your UI. See a comparison on [this page](./renderables-vs-constructs.md).
+Constructs look just like Solid components, but are not render functions. You can think of them as constructors, a way to create new renderables by composing existing ones. They provide a more declarative way to build your UI. See a comparison on [this page](./renderables-vs-constructs.md).
 
 ### Console
 
@@ -334,4 +334,4 @@ container.add(rightPanel)
 ## Next Steps
 
 - Explore the [examples](../src/examples) directory for more complex use cases
-- Check out the React and Solid integrations for declarative UI development
+- Check out the Solid integration for declarative UI development

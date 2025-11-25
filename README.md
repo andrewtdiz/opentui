@@ -20,9 +20,6 @@ This monorepo contains the following packages:
 
 - [`@opentui/core`](packages/core) - The core library works completely standalone, providing an imperative API and all the primitives.
 - [`@opentui/solid`](packages/solid) - The SolidJS reconciler for OpenTUI.
-- [`@opentui/react`](packages/react) - The React reconciler for OpenTUI.
-- [`@opentui/vue`](packages/vue) - The Vue reconciler (unmaintained)
-- [`@opentui/go`](packages/go) - Go bindings (unmaintained)
 
 ## Install
 
@@ -74,7 +71,6 @@ This will link `@opentui/core` to your target project.
 
 **Options:**
 
-- `--react` - Also link `@opentui/react`
 - `--solid` - Also link `@opentui/solid` and `solid-js`
 - `--dist` - Link the built `dist` directories instead of source packages
 - `--copy` - Copy the dist directories instead of symlinking (requires `--dist`)
@@ -87,9 +83,6 @@ This will link `@opentui/core` to your target project.
 
 # Link core and solid
 ./scripts/link-opentui-dev.sh /path/to/your/project --solid
-
-# Link core and react, using dist directories
-./scripts/link-opentui-dev.sh /path/to/your/project --react --dist
 
 # Copy dist directories (useful for environments where symlinks don't work)
 ./scripts/link-opentui-dev.sh /path/to/your/project --dist --copy

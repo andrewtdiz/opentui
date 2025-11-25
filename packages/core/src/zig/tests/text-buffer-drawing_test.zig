@@ -2001,7 +2001,7 @@ test "drawTextBuffer - Chinese text with wrapping no stray bytes" {
     defer view.deinit();
 
     const text =
-        \\前后端分离 - TypeScript逻辑 + Go TUI界面
+        \\前后端分离 - TypeScript逻辑 + Zig TUI界面
         \\组件化设计 - 基于tview的可复用组件
         \\渐进式交互 - 逐步披露避免信息过载
         \\智能上下文 - 基于项目状态动态生成问题
@@ -2060,7 +2060,7 @@ test "drawTextBuffer - Chinese text WITHOUT wrapping no duplicate chunks" {
     defer view.deinit();
 
     const text =
-        \\前后端分离 - TypeScript逻辑 + Go TUI界面
+        \\前后端分离 - TypeScript逻辑 + Zig TUI界面
         \\组件化设计 - 基于tview的可复用组件
         \\渐进式交互 - 逐步披露避免信息过载
         \\智能上下文 - 基于项目状态动态生成问题
@@ -2120,7 +2120,7 @@ test "drawTextBuffer - Chinese text with CHAR wrapping no stray bytes" {
     defer view.deinit();
 
     const text =
-        \\前后端分离 - TypeScript逻辑 + Go TUI界面
+        \\前后端分离 - TypeScript逻辑 + Zig TUI界面
         \\组件化设计 - 基于tview的可复用组件
         \\渐进式交互 - 逐步披露避免信息过载
         \\智能上下文 - 基于项目状态动态生成问题

@@ -37,31 +37,14 @@ const ALL_PACKAGES: PackageConfig[] = [
     distDir: join(rootDir, "packages", "core", "dist"),
   },
   {
-    name: "@opentui/react",
-    rootDir: join(rootDir, "packages", "react"),
-    distDir: join(rootDir, "packages", "react", "dist"),
-    requiresCore: true,
-  },
-  {
     name: "@opentui/solid",
     rootDir: join(rootDir, "packages", "solid"),
     distDir: join(rootDir, "packages", "solid", "dist"),
     requiresCore: true,
   },
-  {
-    name: "@opentui/vue",
-    rootDir: join(rootDir, "packages", "vue"),
-    distDir: join(rootDir, "packages", "vue", "dist"),
-    requiresCore: true,
-  },
 ]
 
-// Parse command line arguments
-const args = process.argv.slice(2)
-const includeVue = args.includes("--include-vue")
-
-// Filter packages based on flags
-const PACKAGES = includeVue ? ALL_PACKAGES : ALL_PACKAGES.filter((pkg) => pkg.name !== "@opentui/vue")
+const PACKAGES = ALL_PACKAGES
 
 function setupNpmAuth(): void {
   if (!process.env.NPM_AUTH_TOKEN) {
@@ -200,7 +183,7 @@ function validatePackage(config: PackageConfig): void {
     console.log(`SUCCESS: All optional dependencies versions match`)
   }
 
-  // For react/solid packages, check @opentui/core dependency version
+  // For Solid package, check @opentui/core dependency version
   if (config.requiresCore) {
     const coreDependencyVersion = distPackageJson.dependencies?.["@opentui/core"]
     if (coreDependencyVersion !== packageJson.version) {
@@ -265,10 +248,6 @@ Continue with publishing? (y/n)
 function main(): void {
   console.log("OpenTUI Pre-Publish Validation")
   console.log("=".repeat(50))
-
-  if (!includeVue) {
-    console.log("INFO: Skipping @opentui/vue (use --include-vue to include)")
-  }
 
   // Setup NPM authentication once
   console.log("\nINFO: Setting up NPM authentication...")
